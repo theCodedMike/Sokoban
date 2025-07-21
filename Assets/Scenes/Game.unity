@@ -160,16 +160,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 246260785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c82cb639a9fcc4ea7ffbd61d14ac63, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ddf7a5caf14fdb458def517290fe8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapSprites:
   - {fileID: 0}
   - {fileID: 21300000, guid: 815803c637464b248bcc67a1b9e4e442, type: 3}
-  mapPrefab: {fileID: 1944197445769522, guid: e207cb876b7b5e845a787282735eaaff, type: 3}
+  brickPrefab: {fileID: 1944197445769522, guid: e207cb876b7b5e845a787282735eaaff, type: 3}
   playerPrefab: {fileID: 1111525757507752, guid: cf35925668f59db4a9f7613ad9520647, type: 3}
-  boxPrefab: {fileID: 1597000244075658, guid: 2684c1c0808861a458b74ca988bb20f6, type: 3}
-  finalBoxPrefab: {fileID: 1899440538421154, guid: 027fd9239f720ce4083cff3eb8953f3b, type: 3}
+  boxPrefab: {fileID: 1899440538421154, guid: 027fd9239f720ce4083cff3eb8953f3b, type: 3}
+  endPointPrefab: {fileID: 1366632003525890, guid: 5707484683143934fa7b05ceaf25dfa6, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -308,25 +307,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c82cb639a9fcc4ea7ffbd61d14ac63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapSprites:
-  - {fileID: 0}
-  - {fileID: 21300000, guid: 815803c637464b248bcc67a1b9e4e442, type: 3}
-  mapPrefab: {fileID: 1944197445769522, guid: e207cb876b7b5e845a787282735eaaff, type: 3}
-  playerPrefab: {fileID: 1111525757507752, guid: cf35925668f59db4a9f7613ad9520647, type: 3}
-  boxPrefab: {fileID: 1597000244075658, guid: 2684c1c0808861a458b74ca988bb20f6, type: 3}
-  finalBoxPrefab: {fileID: 1899440538421154, guid: 027fd9239f720ce4083cff3eb8953f3b, type: 3}
 --- !u!1001 &520265174
 PrefabInstance:
   m_ObjectHideFlags: 0
