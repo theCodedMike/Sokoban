@@ -23,12 +23,13 @@ public class GameController : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject boxPrefab;
     public GameObject endPointPrefab;
+    public GameObject finalPrefab;
 
     private Player _player;
     private Vector3 _moveStep;
     private readonly List<Box> _boxes = new();
     private readonly HashSet<Vector3> _endPointsPosition = new();
-    
+    private string _animationClip;
     
     private void Start()
     {
@@ -104,20 +105,32 @@ public class GameController : MonoBehaviour
     {
         if (IsGameOver())
         {
-            print("游戏结束了...");
-            Application.Quit();
+            GameOver();
         }
         
         _moveStep = Vector3.zero;
+        _animationClip = null;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
             _moveStep = Vector3.up;
+            _animationClip = "Up";
+        }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
             _moveStep = Vector3.down;
+            _animationClip = "Down";
+        }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
             _moveStep = Vector3.left;
+            _animationClip = "Left";
+        }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
             _moveStep = Vector3.right;
+            _animationClip = "Right";
+        }
 
         // 没有移动
         if (_moveStep == Vector3.zero)
@@ -133,7 +146,7 @@ public class GameController : MonoBehaviour
 
         Vector3 nextPos = playerPos + _moveStep;
         TileType nextTile = _tileMap[-(int)nextPos.y, (int)nextPos.x];
-        print($"IsMove: {x} {y} {_moveStep} {nextTile}");
+        //print($"IsMove: {x} {y} {_moveStep} {nextTile}");
         
         // 如果人物下一个运动目标点为空
         if (nextTile is TileType.Blank or TileType.EndPoint)
@@ -143,9 +156,13 @@ public class GameController : MonoBehaviour
             _tileMap[-(int)nextPos.y, (int)nextPos.x] = TileType.Player; // 2
 
             // 玩家移动
-            _player.Move(_moveStep);
+            _player.Move(_moveStep, _animationClip);
             return;
         }
+
+        // 这里可以防止player靠近最边界的城墙时，nextNextTile的索引溢出
+        if (nextTile is TileType.Wall)
+            return;
         
         Vector3 nextNextPos = playerPos + _moveStep * 2;
         TileType nextNextTile = _tileMap[-(int)nextNextPos.y, (int)nextNextPos.x];
@@ -158,7 +175,7 @@ public class GameController : MonoBehaviour
             //箱子移动
             _boxes.First(box => box.transform.position == nextPos).Move(_moveStep);
             //玩家移动
-            _player.Move(_moveStep);
+            _player.Move(_moveStep, _animationClip);
         }
     }
 
@@ -172,5 +189,12 @@ public class GameController : MonoBehaviour
         }
 
         return true;
+    }
+
+    private void GameOver()
+    {
+        print("游戏结束...");
+        Instantiate(finalPrefab, new Vector3(4, -4, 0), Quaternion.identity);
+        Application.Quit(0);
     }
 }
